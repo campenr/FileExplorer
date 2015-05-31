@@ -11,14 +11,15 @@ case of only wanting to select a single file the list is 1 item long).
      
 
 def list_children():
-    """Function returns a dictionary of all children in the current directory.
+    """Function prints a list of all children in the current directory.
 
-    Children include files and sub-directories assosiated with a number. The
+    Children include files and sub-directories assosiated with a number. 
+    Children are stored in a dicitonary and assinged a numeric value. The
     zero value is set as '...' by default, as a placeholder for the parent dir.
     """
 
     #Initialise dictionary containing '...' as placeholder for parent dir
-    children = dict({"...": 0})
+    child_dict = dict({0: "..."})
 
     #Get the list of children in the current working directory
     dir_list = os.listdir(os.getcwd())
@@ -27,20 +28,20 @@ def list_children():
     #setting the key as the file/folder name and incrementing the value
     n = 1
     for i in dir_list:
-        children[i] = n
+        child_dict[n] = i
         n += 1
         
     #Create sorted lists of the keys and values from the children dictionary
-    children_key_list = sorted(children.keys())
-    children_value_list = sorted(children.values())
+    children_key_list = sorted(child_dict.keys())
+    children_value_list = sorted(child_dict.values())
 
     #Print each key/value pair in an easy to read manner
     for n in range(len(children_key_list)):
-        print("[{}] {}".format(children_value_list[n], children_key_list[n])) 
+        print("[{}] {}".format(children_key_list[n], children_value_list[n])) 
 
 
     #Return the dictionary of file/folder name keys and number value pairs
-    return children
+    return child_dict
 
 
 list_children()
