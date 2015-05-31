@@ -1,5 +1,4 @@
 import os
-import tempfile
 
 """Program that performs basic file explorer functionality.
 
@@ -11,7 +10,7 @@ case of only wanting to select a single file the list is 1 item long).
 """
      
 
-def dir_children():
+def list_children():
     """Function returns a dictionary of all children in the current directory.
 
     Children include files and sub-directories assosiated with a number. The
@@ -44,5 +43,5 @@ def dir_children():
     return children
 
 
-dir_children()
+list_children()
 
