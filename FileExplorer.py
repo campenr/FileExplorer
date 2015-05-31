@@ -18,24 +18,29 @@ def dir_children():
     zero value is set as '...' by default, as a placeholder for the parent dir.
     """
 
+    #Initialise dictionary containing '...' as placeholder for parent dir
     children = dict({"...": 0})
 
-    current_dir = os.getcwd()
+    #Get the list of children in the current working directory
+    dir_list = os.listdir(os.getcwd())
 
-    dir_list = os.listdir(current_dir)
-
+    #Iterate over the list of children and add to the children dictionary
+    #setting the key as the file/folder name and incrementing the value
     n = 1
     for i in dir_list:
         children[i] = n
         n += 1
         
-    children_key_list = sorted([i for i in children.keys()])
-    children_value_list = sorted([i for i in children.values()])
+    #Create sorted lists of the keys and values from the children dictionary
+    children_key_list = sorted(children.keys())
+    children_value_list = sorted(children.values())
 
+    #Print each key/value pair in an easy to read manner
     for n in range(len(children_key_list)):
         print("[{}] {}".format(children_value_list[n], children_key_list[n])) 
 
 
+    #Return the dictionary of file/folder name keys and number value pairs
     return children
 
 
