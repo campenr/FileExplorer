@@ -9,40 +9,8 @@ selection of a file using a number. Funciton returns a list of files (in the
 case of only wanting to select a single file the list is 1 item long).
 """
      
-def set_dir():
-    """Funciton that sets the working directory.
 
-    First lists the current working directory and asks if this is the correct
-    directory. If no, then the directory must be specified by the user. Returns
-    a new directory as the current wokring directory.
-    """
-
-    #Print current working directory
-    working_dir = os.getcwd()
-    print("Current wokring directory: {}".format(working_dir))
-
-    #Check working directory, and collect new directory if incorrect    
-    
-
-    while True:
-        
-        #Query if current wokring directory is correct
-        query = input("Is current working directory correct? Y/N")
-        if query == "Y" or query == "y":
-            print("y")
-            return False
-        elif query == "N" or query == "n":
-            print("n")
-            working_dir = input("Enter new working directory")
-            print("Current wokring directory: {}".format(working_dir))
-            return True
-            
-        
-    
-    pass
-
-
-def list_children(working_dir):
+def list_children():
     """Function prints a list of all children in the current directory.
 
     Children include files and sub-directories assosiated with a number. 
@@ -54,7 +22,7 @@ def list_children(working_dir):
     child_dict = dict({0: "..."})
 
     #Get the list of children in the current working directory
-    dir_list = os.listdir(working_dir)
+    dir_list = os.listdir(os.getcwd())
 
     #Iterate over the list of children and add to the children dictionary
     #setting the key as the file/folder name and incrementing the value
@@ -68,7 +36,6 @@ def list_children(working_dir):
     children_value_list = sorted(child_dict.values())
 
     #Print each key/value pair in an easy to read manner
-    print(working_dir)
     for n in range(len(children_key_list)):
         print("[{}] {}".format(children_key_list[n], children_value_list[n])) 
 
@@ -76,6 +43,7 @@ def list_children(working_dir):
     #Return the dictionary of file/folder name keys and number value pairs
     return child_dict
 
+<<<<<<< HEAD
 def browse_dir(current_dir):
     """Function that can change to a selected directory.
 
@@ -108,5 +76,8 @@ browse_dir(os.getcwd())
         
 
 
+=======
+>>>>>>> parent of ca09cb3... created change_dir() funciton
 
+list_children()
 
