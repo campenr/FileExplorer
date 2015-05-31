@@ -44,6 +44,7 @@ def list_children():
     return child_dict
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 def browse_dir(current_dir):
     """Function that can change to a selected directory.
 
@@ -79,5 +80,8 @@ browse_dir(os.getcwd())
 =======
 >>>>>>> parent of ca09cb3... created change_dir() funciton
 
+=======
+
+>>>>>>> parent of ca09cb3... created change_dir() funciton
 list_children()
 
