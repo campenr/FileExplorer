@@ -76,7 +76,7 @@ def list_children(working_dir):
     #Return the dictionary of file/folder name keys and number value pairs
     return child_dict
 
-def change_dir(current_dir):
+def browse_dir(current_dir):
     """Function that can change to a selected directory.
 
     Can change to the parent of the current directory, or to a sub directory
@@ -85,25 +85,28 @@ def change_dir(current_dir):
 
     child_dict = list_children(current_dir)
 
-    new_dir_number = int(input("Enter a number to select the corresponding dir"))
+    new_dir_number = int()
+    
+    while new_dir_number != "X":
+        
+        new_dir_number = int(input("Enter a number to select the corresponding dir"))
    
-    if new_dir_number == 0:
-        return os.chdir(os.path.dirname(current_dir))
-    elif new_dir_number != 0:
-        try:
-            sub_dir = child_dict[int(new_dir_number)]
-            os.chdir(os.path.join(current_dir, sub_dir))
-        except NotADirectoryError:
-            print("Not a valid directory")
+        if new_dir_number == 0:
+            os.chdir(os.path.dirname(current_dir))
+        elif new_dir_number != 0:
+            try:
+                sub_dir = child_dict[int(new_dir_number)]
+                os.chdir(os.path.join(current_dir, sub_dir))
+            except NotADirectoryError:
+                print("Not a valid directory")
 
         
+        return
     return
     
-def browse_dir():
-    while True:
-        change_dir(os.getcwd())
+browse_dir(os.getcwd())
         
 
-browse_dir()
+
 
 
