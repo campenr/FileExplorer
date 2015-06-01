@@ -3,10 +3,8 @@ import os
 """Program that performs basic file explorer functionality.
 
 Program allows setting of current working directory, and listing of files/sub-
-directories in current directory. Files listed in the directory can be filtered
-by file type. Files/sub-directories are given a correspoding number allowing
-selection of a file using a number. Funciton returns a list of files (in the
-case of only wanting to select a single file the list is 1 item long).
+directories in current directory. Files/sub-directories are given a
+correspoding number allowing selection of a file using a number. 
 """
      
 
