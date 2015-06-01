@@ -51,7 +51,7 @@ def change_dir():
     """
 
     #Obtains and prints the current working directory, and prints the children
-    #using list_children()
+    #by calling the list_children() function
     current_dir = os.getcwd()
     print(current_dir)
     child_dict = list_children()
@@ -61,10 +61,11 @@ def change_dir():
 
     #Change the directory
     #If 0 was selected change directory to parent directory
-    if new_dir_number == 0:
-        os.chdir(os.path.dirname(current_dir))
-        print("f" ,os.path.dirname(current_dir))
-
+    if new_dir_number == "0":
+        try:
+            os.chdir(os.path.dirname(current_dir))
+        except PermissionError:
+            print("Insufficient permissions. Try running as administrator")
     #If a value other than 0 selected change to the specified directory or catch
     #exceptions caused by invalid choices
     else:
