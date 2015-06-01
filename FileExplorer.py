@@ -61,8 +61,9 @@ def change_dir():
 
     #Change the directory
     #If 0 was selected change directory to parent directory
-    if new_dir_number == "0":
+    if new_dir_number == 0:
         os.chdir(os.path.dirname(current_dir))
+        print("f" ,os.path.dirname(current_dir))
 
     #If a value other than 0 selected change to the specified directory or catch
     #exceptions caused by invalid choices
