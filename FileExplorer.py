@@ -68,7 +68,7 @@ def list_children(child_dict):
 
 
 def change_dir():
-    """Select a new working directory from the children or parent dir.
+    """Select a new working directory from a child or parent directory.
  
     Can change to the parent of the current directory, or to a child
     directory by selecting the assosiated number displayed by the
