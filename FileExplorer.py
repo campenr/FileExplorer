@@ -8,8 +8,8 @@ of a file/folder using the number.
 
 import os
 
-def find_children(directory=os.getcwd(), child_filter="False",
-                  filter_type="None"):
+def find_children(directory, child_filter=False,
+                  filter_type="none"):
     """Create a dicitonary of names of children in a directory.
 
     Children in the directory are stored as values in the dictionary
@@ -26,6 +26,7 @@ def find_children(directory=os.getcwd(), child_filter="False",
     argument must be set, it's default is none. The valid filter_type
     arguments are:
 
+    none   - does not filter the children (default)
     file   - filters to show only children that are files
     folder - filters to show only children that are folders
     """
@@ -33,9 +34,31 @@ def find_children(directory=os.getcwd(), child_filter="False",
     #Initialise dictionary
     child_dict = dict({0: "..."})
     
-    #Get the list of children in the current working directory
-    dir_list = os.listdir(os.getcwd())
+    #Get list of all children in current working directory if child_filter
+    #is False, or filter_type set as 'none'.
+    if not child_filter or filter_type == "none":
+        dir_list = os.listdir(directory)
+        
+    #Get the list of children in the current working directory, filtered
+    #according to filter_type if child_filter is True    
+    elif child_filter:
 
+        #Filters out folders
+        if filter_type == "file":
+            dir_list = [child for child in os.listdir(directory)
+                        if os.path.isfile(child)]
+
+        #Filters out files    
+        elif filter_type == "folder":
+            dir_list = [child for child in os.listdir(directory)
+                        if os.path.isdir(child)]
+            
+        #If an incorrect filter type is entered the deafult is selected
+        #and a message printed to notify user
+        else:
+            print("Invalid filter selected, deafult of 'none' chosen")
+            dir_list = os.listdir(directory)
+ 
     #Iterate over the list of children and add to the child-dict object
     #setting the value as the file/folder name and incrementing the key
     n = 1
@@ -45,7 +68,7 @@ def find_children(directory=os.getcwd(), child_filter="False",
 
     return child_dict
 
-def list_children(child_dict):
+def display_children():
     """Print the child_dict in an easy to read format.
 
     Takes the child_dict dictionary object returned by the find_children()
@@ -65,32 +88,33 @@ def list_children(child_dict):
     for n in child_key_list:
         print("[{}] {}".format(child_key_list[n], child_dict[n])) 
 
-    return
+    #Return list of children
+    return list(child_dict.values())
 
 
 def change_dir():
     """Change the current working directory to a child/parent directory.
  
     This function is intended to operate within a loop provided by
-    another function browse_dir().
+    another function, browse_dir().
 
     Displays the current working dictionary, and then displays the
     children in the current working directory (files and folders) using
-    list_children. User is prompted to select a new directory by
+    display_children. User is prompted to select a new directory by
     entering the assosiated number. The function returns user input as
     new_dir_number.
 
     An additional option of 'X' is used to confirm the current directory
     by returning False, discontinuing the loop in the funciton browse_dir()
-    that change_dir is implemented in.
+    that change_dir is called in.
     """
 
     #Obtains and prints the current working directory, and prints the
     #children by calling the list_children() function
     current_dir = os.getcwd()
     print(current_dir)
-    child_dict = find_children()
-    list_children(child_dict)
+    child_dict = find_children(current_dir)
+    display_children(child_dict)
     
     #Collect input from user to change the directory
     new_dir_number = input("Enter a number to select the corresponding "
@@ -125,7 +149,7 @@ def browse_dir():
     #checking the output of change_dir() and continuing loop while True
     while True:
         #Try to change the directory, and check if new_dir_number is
-        #True If new_dir_number is False loop terminates confirming the
+        #True. If new_dir_number is False loop terminates confirming the
         #current directory as the working directory.
         try:
             new_dir_number = change_dir()
@@ -144,5 +168,9 @@ def browse_dir():
     return
 
 browse_dir()
-        
+files = list(find_children(os.getcwd(), child_filter=True, filter_type='file').values())[1::]
+print(files)
+
+
+
     
