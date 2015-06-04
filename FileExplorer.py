@@ -1,27 +1,30 @@
-"""Program that performs basic file explorer functionality.
+"""Program that performs basic file/direcotry explorer functionality.
 
 Program allows setting of current working directory, and listing of
-files/sub- directories in current directory. Files/sub-directories are
-given a correspoding number allowing selection of a file using a number.
+files/folder children in current directory. Children are stored in a
+dicitonary object and given a correspoding number allowing selection
+of a file/folder using the number.
 """
 
 import os
 
-def find_children(child_filter="False", filter_type="None"):
-    """Create a dicitonary of names of children in current directory.
+def find_children(directory=os.getcwd(), child_filter="False",
+                  filter_type="None"):
+    """Create a dicitonary of names of children in a directory.
 
     Children in the directory are stored as values in the dictionary
     and are assinged a non-zero positive integer as a key. Children
     include files and folders. The 0 key is assinged to '...' which
     acts as a placeholder for the parent directory. Returns the
-    child_dict dictionary object.
+    child_dict dictionary object. The directory is set as the current
+    working directory by default, using os.getcwd().
     
-    - Implement the following:
+    -Implement the following:
     
-    Children can be filtered by setting the child_filter
-    argument to True, the default is False. If filtering is selected the
-    filter_type argument must be set, it's default is none. The valid
-    filter_type arguments are:
+    Children can be filtered by setting the child_filter argument to
+    True, the default is False. If filtering is selected the filter_type
+    argument must be set, it's default is none. The valid filter_type
+    arguments are:
 
     file   - filters to show only children that are files
     folder - filters to show only children that are folders
@@ -53,8 +56,6 @@ def list_children(child_dict):
     [0] ...
     [1] child_1
     [2] child_2
-
-    Returns the keys of the child_dict as a list.
     """
      
     #Create a sorted list of the keys from the child dictionary
@@ -64,15 +65,24 @@ def list_children(child_dict):
     for n in child_key_list:
         print("[{}] {}".format(child_key_list[n], child_dict[n])) 
 
-    return child_key_list
+    return
 
 
 def change_dir():
-    """Select a new working directory from a child or parent directory.
+    """Change the current working directory to a child/parent directory.
  
-    Can change to the parent of the current directory, or to a child
-    directory by selecting the assosiated number displayed by the
-    list_children() function.
+    This function is intended to operate within a loop provided by
+    another function browse_dir().
+
+    Displays the current working dictionary, and then displays the
+    children in the current working directory (files and folders) using
+    list_children. User is prompted to select a new directory by
+    entering the assosiated number. The function returns user input as
+    new_dir_number.
+
+    An additional option of 'X' is used to confirm the current directory
+    by returning False, discontinuing the loop in the funciton browse_dir()
+    that change_dir is implemented in.
     """
 
     #Obtains and prints the current working directory, and prints the
@@ -88,7 +98,7 @@ def change_dir():
                            "directory: ")
 
     #Change the directory
-    #If 0 selected change to the parent directory    
+    #If '0' selected change to the parent directory    
     if new_dir_number == "0":
         os.chdir(os.path.dirname(current_dir))
     #If 'X' or 'x' selected set new_dir_number to False
@@ -104,11 +114,10 @@ def change_dir():
 
 def browse_dir():
     """
-    Function that allows the user to browse the directory tree.
+    Loop change_dir() while True to browse directory tree.
 
-    This funciton implements the funciton change_dir() and continues to
-    prompt the user until the loop is terminated thereby selecting the
-    current directory as the working directory. This funciton catches
+    Loops change_dir(), checking the output each time that new_dir_number
+    is True. If False the loop is terminated. This funciton catches
     any exceptions encountered while attempting to change the directory.
     """
 
@@ -134,7 +143,6 @@ def browse_dir():
             print("Insufficient permissions. Try running as administrator")
     return
 
-
-change_dir()
+browse_dir()
         
     
