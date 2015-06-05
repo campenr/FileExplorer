@@ -9,7 +9,7 @@ of a file/folder using the number.
 import os
 
 def list_children(directory, filter_type="none"):
-    """Create a list of children in 'directory'.
+    """Create a list of the children in 'directory'.
 
     Children in a directory are stored in a list, which can be filtered
     to contain only files or directories. Function returns a list of
@@ -32,8 +32,8 @@ def list_children(directory, filter_type="none"):
         child_list = [child for child in os.listdir(directory)
                       if os.path.isfile(child)]
 
-    #Get the list of all folders in the directory if filter_type is set
-    #as 'folder'    
+    #Get the list of all directories in the directory if filter_type
+    #is set as 'folder'    
     elif filter_type == "dir":
         child_list = [child for child in os.listdir(directory)
                       if os.path.isdir(child)]
@@ -60,12 +60,23 @@ def filter_file_type(file_list, file_type):
     
     return file_list
 
+def user_input_file_type(file_list):
+    """Implement filter_file_type with user input file_type.
+
+    Prompt user for file_type and use this to run fitler_file_type.
+    """
+
+    file_type = input("Enter file type to filter: ")
+    file_list = filter_file_type(file_list, file_type)
+
+    return file_list
+
 def create_child_dict(child_list, show_parent=True):
     """Build a dicitonary of child objects and numeric keys.
 
     Iterate over a list of child objects and add them to a dicitonary,
     assinging a numeric key. The numeric key starts at one and is
-    incremented by one for each child object. The Zero key is added to
+    incremented by one for each child object. The zero key is added to
     represent the parent directory if show_parent is set to True.
     """
 
@@ -75,12 +86,14 @@ def create_child_dict(child_list, show_parent=True):
     #Add child objects to child_dict with nuemric keys
     if show_parent:
         child_dict[0] = "..."
+        n = 1
+    else:
+        n = 0
 
-    n = 1
     for child in child_list:
         child_dict[n] = child
         n += 1
-
+   
     return child_dict
 
 def display_children(child_dict):
@@ -97,12 +110,39 @@ def display_children(child_dict):
  
     #Create a sorted list of the keys from the child dictionary
     child_key_list = sorted(child_dict.keys())
-            
+               
     #Print each key/value pair in an easy to read manner
     for n in child_key_list:
-        print("[{0}] {1}".format(child_key_list[n], child_dict[n])) 
+        print("[{}] {}".format(child_key_list[n], child_dict[n])) 
 
     return
+
+def select_files(file_list):
+    """Sub...? list of files defined by user input.
+
+    Sub...? file_list according to user input. Files are selected by
+    their number assosiated in the child_dict object. Function returns a
+    list of files.
+    """
+    
+    #Generate child_dict object with create_child_dict funciton from
+    #the file_list argument
+    child_dict = create_child_dict(file_list, show_parent=False)
+
+    #Disaply the generated child_dict using display_children
+    display_children(child_dict)
+
+    #Prompt user to input files to select
+    file_select = input("Select a file using the assosiated number, or"
+                        " 'all' to select all files: ")
+
+    #Splice file_list according to user input and return a new_list
+    if file_select == "all":
+        file_list = file_list
+    else:
+        file_list = [file_list[int(file_select)]]
+
+    return file_list
 
 
 def change_dir():
@@ -184,5 +224,13 @@ def browse_dir():
                   "administrator")
     return
 
-browse_dir()
 
+current_dir = os.getcwd()
+    
+child_list = list_children(current_dir, filter_type="file")
+    
+file_list = user_input_file_type(child_list)
+
+select_files(file_list)
+
+print(file_list)
