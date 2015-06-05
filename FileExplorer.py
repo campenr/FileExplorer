@@ -229,8 +229,12 @@ current_dir = os.getcwd()
     
 child_list = list_children(current_dir, filter_type="file")
     
-file_list = user_input_file_type(child_list)
+child_dict = create_child_dict(child_list, show_parent=True)
 
-select_files(file_list)
+print(child_dict)
 
-print(file_list)
+#file_list = user_input_file_type(child_list)
+
+#select_files(file_list)
+
+#print(file_list)
