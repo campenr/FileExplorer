@@ -72,28 +72,21 @@ def user_input_file_type(file_list):
     return file_list
 
 def create_child_dict(child_list, show_parent=True):
-    """Build a dicitonary of child objects and numeric keys.
+    """Build a dicitonary of child object values, and numeric keys.
 
-    Iterate over a list of child objects and add them to a dicitonary,
-    assinging a numeric key. The numeric key starts at one and is
-    incremented by one for each child object. The zero key is added to
-    represent the parent directory if show_parent is set to True.
+    Iterate over child_list and combie with an incrementing integer
+    using enumerate, and store in a dictionary object. If show_parent
+    is set to True the child_list is prepended with '...' as a
+    placeholder for the parent direcotry.
     """
 
-    #Initialize empty dictionary
-    child_dict = {}
+    #If show_parent is true, prepend child_list with the parent place
+    #holder string '...'
+    if show_parent: child_list.insert(0, "...")
 
-    #Add child objects to child_dict with nuemric keys
-    if show_parent:
-        child_dict[0] = "..."
-        n = 1
-    else:
-        n = 0
-
-    for child in child_list:
-        child_dict[n] = child
-        n += 1
-   
+    #Generate dictionary from enumerating child_list
+    child_dict = dict(enumerate(child_list))
+    
     return child_dict
 
 def display_children(child_dict):
@@ -224,14 +217,15 @@ def browse_dir():
                   "administrator")
     return
 
+browse_dir()
 
-current_dir = os.getcwd()
+#current_dir = os.getcwd()
     
-child_list = list_children(current_dir, filter_type="file")
+#child_list = list_children(current_dir, filter_type="file")
     
-child_dict = create_child_dict(child_list, show_parent=True)
+#child_dict = create_child_dict(child_list, show_parent=True)
 
-print(child_dict)
+#print(child_dict)
 
 #file_list = user_input_file_type(child_list)
 
