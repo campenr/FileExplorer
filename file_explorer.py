@@ -1,6 +1,6 @@
 # Copyright 2015 Richard Campen
 # All rights reserved
-# This software is released under the modified BSD license
+# This software is released under the Modified BSD license
 # See LICENSE.txt for the full license documentation
 
 """Module that enables basic file/direcotry explorer functionality.
@@ -219,4 +219,3 @@ def select_files(file_list):
 
     return file_list
 
-browse_dir()
