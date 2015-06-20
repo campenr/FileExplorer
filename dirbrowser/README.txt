@@ -22,7 +22,7 @@ line environment, e.g. Windows shell. Using the two main functions
 browse_dir() and select_files() in combination allows the user
 to browse the directory tree and set a working directory, and return
 a list of files within that directory, optionally filtered by file
-type. This list of files can then be utilised by other scripts.
+type. This list of files can then be utilised by other programs.
 
 The display of the directory is formatted as follows, where the 
 ellipsis, '...', represents the parent directory:
