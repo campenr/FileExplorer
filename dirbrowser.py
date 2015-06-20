@@ -3,13 +3,13 @@
 # This software is released under the Modified BSD license
 # See LICENSE.txt for the full license documentation
 
-"""Module that enables basic file/direcotry explorer functionality.
+"""Module that enables basic file/direcotry browser functionality.
 
 dirbrowser version 0.1b
 =======================
 
-This module includes a number of functions that provide basic file
-explorer functionality in an easy to view format within a command 
+This module includes a number of functions that provide basic direcotry
+browser functionality in an easy to view format within a command 
 line environment, e.g. Windows shell. Using the two main functions
 browse_dir() and select_files() in combination allows the user
 to browse the directory tree and set a working directory, and return

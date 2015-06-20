@@ -53,5 +53,5 @@ user to enter a file type suffix at the command line.
 License
 -------
 
-This software is released under the modified BSD license. See 
+This software is released under the Modified BSD license. See 
 LICENSE.txt for the full license.
