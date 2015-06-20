@@ -25,15 +25,14 @@ a list of files within that directory, optionally filtered by file
 type. This list of files can then be utilised by other programs.
 
 The display of the directory is formatted as follows, where the 
-ellipsis, '...', represents the parent directory:
+ellipsis, '...', represents the parent directory: ::
 
-''
 [0] ...
 [1] Folder1
 [2] File1.py
 [3] File2.txt
 [4] Folder2
-''
+
 
 
 Using browse_dir() the children within a directory can be viewed,
