@@ -13,16 +13,16 @@ reports should be submitted via the github issue tracker.
 Documentation
 -------------
 
-This software is built for python 3, and is not backwards compatible
+This module is built for python 3, and is not backwards compatible
 with python 2. 
 
-This module includes a number of functions that provide basic file
-explorer functionality in an easy to view format within a command 
-line environment, e.g. Windows shell. Using the two main functions
-browse_dir() and select_files() in combination allows the user
-to browse the directory tree and set a working directory, and return
-a list of files within that directory, optionally filtered by file
-type. This list of files can then be utilised by other programs.
+This module includes a number of functions that provide basic 
+directory browser functionality, in an easy to view format, within a 
+command line environment, e.g. cmd.exe. Using the main function
+browse_dir() allows the user to browse the directory tree and set the
+current working directory. Another function, select_files() can be 
+used to return a list of files within that directory, optionally 
+filtered by file type. 
 
 The display of the directory is formatted as follows, where the 
 ellipsis, '...', represents the parent directory: ::
@@ -33,13 +33,14 @@ ellipsis, '...', represents the parent directory: ::
 [3] File2.txt
 [4] Folder2
 
-
-
 Using browse_dir() the children within a directory can be viewed,
 the directory tree traversed, and the working directory set. The
 browse_dir() function is a wrapper for the change_dir() function
-that creates and displays the children of the current directory
-with calls to create_child_dict() and display_children() respectively.
+that creates and displays the children of the current directory.
+This is done with with calls to create_child_dict(), which takes a
+list of children and adds to a dictionary object, and 
+display_children() which displays the contents of the dictionary in
+the above format.
 
 The select_files() function displays the file child objects of the
 current working directory, and allows the user to specify whether to
