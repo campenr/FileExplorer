@@ -1,4 +1,4 @@
-file_explorer version 0.1b
+dirbrowser version 0.1b
 ==========================
 
 
