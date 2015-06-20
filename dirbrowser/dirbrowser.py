@@ -5,8 +5,8 @@
 
 """Module that enables basic file/direcotry browser functionality.
 
-dirbrowser version 0.1b
-=======================
+dirbrowser version 1.0a1
+========================
 
 This module includes a number of functions that provide basic direcotry
 browser functionality in an easy to view format within a command 
