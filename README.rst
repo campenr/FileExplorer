@@ -22,7 +22,7 @@ command line environment, e.g. cmd.exe. Using the main function
 browse_dir() allows the user to browse the directory tree and set the
 current working directory. Another function, select_files() can be 
 used to return a list of files within that directory, optionally 
-filtered by file type. 
+filtered by file type.
 
 The display of the directory is formatted as follows, where the 
 ellipsis, '...', represents the parent directory: ::
