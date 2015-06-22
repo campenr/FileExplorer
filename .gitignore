@@ -1,7 +1,7 @@
 # Build folders
-.build
-.dirbrowser.egg-info
-.dist
+/build
+/dirbrowser.egg-info
+/dist
 
 # Windows image file caches
 Thumbs.db
