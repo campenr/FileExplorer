@@ -1,0 +1,10 @@
+LICENSE.txt
+MANIFEST.in
+README.rst
+setup.py
+dirbrowser/__init__.py
+dirbrowser/dirbrowser.py
+dirbrowser.egg-info/PKG-INFO
+dirbrowser.egg-info/SOURCES.txt
+dirbrowser.egg-info/dependency_links.txt
+dirbrowser.egg-info/top_level.txt
