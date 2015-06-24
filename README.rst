@@ -1,4 +1,4 @@
-dirbrowser version 1.0a1
+dirbrowser version 1.0a2
 ========================
 
 
