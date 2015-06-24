@@ -5,7 +5,7 @@
 
 """Module that enables basic file/direcotry browser functionality.
 
-dirbrowser version 1.0a1
+dirbrowser version 1.0a2
 ========================
 
 This module includes a number of functions that provide basic direcotry
@@ -173,7 +173,7 @@ def browse_dir():
 
     # Generate loop to repeatedly request user to change directory while
     # checking the output of change_dir() and continuing loop while True
-    # and catching exceptions
+    # and catching specific exceptions
     while True:
         try:
             dir_number = change_dir()

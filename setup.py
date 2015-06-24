@@ -1,3 +1,5 @@
+#!/usr/bin/python3
+
 """Setup.py for dirbrowser.
 
 """
@@ -16,7 +18,7 @@ with open(path.join(here, 'README.rst'), encoding='utf-8') as f:
 
 setup(
     name = "dirbrowser",
-    version = "1.0a1",
+    version = "1.0a2",
     description = "Command line based directory browser",
     long_description = long_description,
     url = "https://github.com/campenr/dirbrowser",

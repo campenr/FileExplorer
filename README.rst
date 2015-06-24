@@ -10,8 +10,8 @@ date only been performed with Windows 8.1 Pro using cmd.exe. Bug
 reports should be submitted via the github issue tracker.
 
 
-Documentation
--------------
+Usage
+-----
 
 This module is built for python 3, and is not backwards compatible
 with python 2. 
