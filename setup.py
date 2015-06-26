@@ -22,7 +22,8 @@ setup(
     description = "Command line based directory browser",
     long_description = long_description,
     url = "https://github.com/campenr/dirbrowser",
-    #author = "Richard Campen",
+    author = "Richard Campen",
+    author_email = "richard@campen.co",
     license = "BSD License",
 
     classifiers=[
