@@ -16,6 +16,10 @@ to browse the directory tree and set a working directory, and return
 a list of files within that directory, optionally filtered by file
 type. This list of files can then be utilised by other scripts.
 
+TODO:
+- Create a demo in this docstring that can be exectuted to demonsrate
+the modules functionality.
+
 See README.txt for full documentation.
 """
 
