@@ -59,7 +59,6 @@ ToDo
 - Add support for selecting subsets of files instead of only all or 1
 - Alter reporting of current directory if path is more than n items to
   display the current path in a more friendly way
-- 
 
 
 License
