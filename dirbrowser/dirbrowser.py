@@ -3,7 +3,7 @@
 # This software is released under the Modified BSD license
 # See LICENSE.txt for the full license documentation
 
-"""Module that enables basic file/direcotry browser functionality.
+"""Module that enables basic file/directory browser functionality.
 
 dirbrowser version 1.0a2
 ========================
@@ -17,7 +17,7 @@ a list of files within that directory, optionally filtered by file
 type. This list of files can then be utilised by other scripts.
 
 TODO:
-- Change use of a dictionary and keys to using a list and list indicies
+- Change use of a dictionary and keys to using a list and list indices
   for the child_dict object
 - Change filter_file_type to use .split to identify file type
 
@@ -34,7 +34,7 @@ def list_children(directory, filter_type="none"):
     to contain only files or directories. Function returns a list of
     file and/or directory names. Valid filter_type arguments are:
 
-    'none'  - Does not filter children. Deafult option.
+    'none'  - Does not filter children. Default option.
     'file'  - Filter only allows files
     'dir'   - Filter only allows directories
     """
@@ -51,10 +51,10 @@ def list_children(directory, filter_type="none"):
         child_list = [child for child in os.listdir(directory)
                       if os.path.isdir(child)]
 
-    # If an incorrect filter_type is entered the deafult 'none' is
+    # If an incorrect filter_type is entered the default 'none' is
     # selected and a message printed to notify user
     else:
-        print("Invalid filter selected, deafult of 'none' chosen")
+        print("Invalid filter selected, default of 'none' chosen")
         child_list = os.listdir(directory)
 
     return child_list
@@ -90,12 +90,12 @@ def user_input_file_type(file_list):
 
 
 def create_child_dict(child_list, show_parent=True):
-    """Build a dicitonary of child object values, and numeric keys.
+    """Build a dictionary of child object values, and numeric keys.
 
-    Iterate over child_list, combie with an incrementing integer
+    Iterate over child_list, combine with an incrementing integer
     using enumerate, and store in a dictionary object. If show_parent
     is set to True the child_list is prepended with '...' as a
-    placeholder for the parent direcotry.
+    placeholder for the parent directory.
     """
 
     # If show_parent is true, prepend child_list with the parent place
@@ -140,11 +140,11 @@ def change_dir():
 
     Displays the current working dictionary, and then displays the
     children in the current working directory (files and directories).
-    User is prompted to select a new directory by entering the assosiated
+    User is prompted to select a new directory by entering the associated
     number. The function returns user input as dir_number.
 
     An additional option of 'X' is used to confirm the current directory
-    by returning False, discontinuing the loop in the funciton
+    by returning False, discontinuing the loop in the function
     browse_dir() that change_dir is called in.
     """
 
@@ -177,7 +177,7 @@ def browse_dir():
     """Loop change_dir() to browse directory tree, and catch exceptions.
 
     Loops change_dir(), checking the output each time that dir_number is
-    True. If False the loop is terminated. This funciton catches any
+    True. If False the loop is terminated. This function catches any
     exceptions encountered by change_dir() while attempting to change
     the directory.
     """
@@ -207,20 +207,20 @@ def browse_dir():
 def select_files(file_list):
     """Generate a list of files as specified by user input.
 
-    Files are selected by their number assosiated in the child_dict
+    Files are selected by their number associated in the child_dict
     object.
 
     To implement:
     - Enable selecting a subset of files instead of simply all or one
     """
 
-    # Generate child_dict object with create_child_dict funciton from
+    # Generate child_dict object with create_child_dict function from
     # the file_list and display with display_children()
     child_dict = create_child_dict(file_list, show_parent=False)
     display_children(child_dict)
 
     # Prompt user to input files to select
-    file_select = input("Select a file using the assosiated number, or"
+    file_select = input("Select a file using the associated number, or"
                         " 'all' to select all files: ")
 
     # Splice file_list according to user input and return a new list

@@ -52,7 +52,7 @@ the file suffix of the files to be returned. Optionally,
 user_input_file_type(), a wrapper for filter_file_type, prompts the
 user to enter a file type suffix at the command line.
 
-ToDo
+TODO
 ----
 
 - Update documentation to give better usage examples
