@@ -17,121 +17,91 @@ a list of files within that directory, optionally filtered by file
 type. This list of files can then be utilised by other scripts.
 
 TODO:
-- Change use of a dictionary and keys to using a list and list indices
-  for the child_dict object
-- Change filter_file_type to use .split to identify file type
+- add support for selecting multiple files in select_files() instead
+  of either all or one
 
 See README.txt for full documentation.
 """
 
 import os
 
-
-def list_children(directory, filter_type="none"):
+def list_children(directory, filter_type=None, file_filter=None,
+                  show_parent=True):
     """Create a list of the children in 'directory'.
 
     Children in a directory are stored in a list, which can be filtered
-    to contain only files or directories. Function returns a list of
-    file and/or directory names. Valid filter_type arguments are:
+    to contain only files or directories by setting filter_type. Valid
+    arguments are:
 
-    'none'  - Does not filter children. Default option.
+    None    - Does not filter children. Default option.
     'file'  - Filter only allows files
     'dir'   - Filter only allows directories
+
+    If filter_type is set to "file", the child_list can be additionally
+    filtered by the files extension by setting file_filter, which takes
+    a string and matches it to the file name. If no files have a matching
+    extension the resulting child_list will be empty.
     """
 
+    child_list = list()
     list_dir = os.listdir(directory)
 
     # Get the list of children in the current directory, filtered
     # according to filter_type
-    if filter_type == "none":
-        child_list = list_dir
-    elif filter_type == "file":
-        child_list = [child for child in list_dir
-                      if os.path.isfile(child)]
-    elif filter_type == "dir":
+    if filter_type == "dir":
         child_list = [child for child in list_dir
                       if os.path.isdir(child)]
+    elif filter_type is None or filter_type == "file":
+        if filter_type is None:
+            child_list = list_dir
+            # If filter_type is none then file_filter is set to None
+            file_filter = None
+        elif filter_type == "file":
+            child_list = [child for child in list_dir
+                          if os.path.isfile(child)]
 
-    # If an incorrect filter_type is entered the default 'none' is
+    # If an incorrect filter_type is entered the default 'None' is
     # selected and a message printed to notify user
     else:
-        print("Invalid filter selected, default of 'none' chosen")
+        print("Invalid filter selected, default of 'None' chosen")
         child_list = list_dir
+
+    # Filter files by file_filter if filter_type = "file"
+    if filter_type == "file":
+        if file_filter is not None:
+            child_list = [child for child in child_list
+                          if child.endswith(file_filter)]
+
+    # Prepend child_list with ".." placeholder for parent directory
+    # if show_parent=True
+    if show_parent is True:
+        child_list.insert(0, "..")
+
+    # Prepend child_list with an empty placeholder at 0th index
+    child_list.insert(0, "")
 
     return child_list
 
+def display_children(child_list):
+    """Print child_list in an easy to read format.
 
-def filter_file_type(file_list, file_type):
-    """Filter a list of files by 'file type'.
+    Takes the child_list object and displays it in an easy to read
+    manner, with their indices for easy selection as shows:
 
-    Filters a list of files according to file_type, which is a string
-    that matches the file suffix e.g. txt, doc, jpg, py.
+    [1] ...
+    [2] Folder1
+    [3] File1.py
+    [4] File2.txt
+    [5] Folder2
+
+    The 0th index is hidden and is a placeholder for selecting the
+    current working directory.
     """
 
-    # Create new file_list by iterating over old file_list and only
-    # including files that have ends matching the given file_type
-    file_list = [file for file in file_list
-                 if file.endswith(file_type)]
-
-    return file_list
-
-
-def user_input_file_type(file_list):
-    """Implement filter_file_type with user input file_type.
-
-    """
-
-    # Prompt user to input file type to filter
-    file_type = input("Enter file type to filter: ")
-
-    # Create new file_list filtered by user specified file_type
-    file_list = filter_file_type(file_list, file_type)
-
-    return file_list
-
-
-def create_child_dict(child_list, show_parent=True):
-    """Build a dictionary of child object values, and numeric keys.
-
-    Iterate over child_list, combine with an incrementing integer
-    using enumerate, and store in a dictionary object. If show_parent
-    is set to True the child_list is prepended with '...' as a
-    placeholder for the parent directory.
-    """
-
-    # If show_parent is true, prepend child_list with the parent place
-    # holder string '...'
-    if show_parent: child_list.insert(0, "...")
-
-    # Generate dictionary from enumerating child_list
-    child_dict = dict(enumerate(child_list))
-
-    return child_dict
-
-
-def display_children(child_dict):
-    """Print child_dict in an easy to read format.
-
-    Takes the child_dict dictionary object returned by the create_child
-    _dict() function and displays the children ordered numerically by
-    their keys in an easy to read manner, i.e:
-
-    [0] ...
-    [1] Folder1
-    [2] File1.py
-    [3] File2.txt
-    [4] Folder2
-    """
-
-    # Create a sorted list of the keys from the child dictionary
-    child_key_list = sorted(child_dict.keys())
-
-    # Print each key/value pair in an easy to read manner
-    for n in child_key_list:
-        print("[{}] {}".format(child_key_list[n], child_dict[n]))
+    for child in child_list[1::]:
+        print("[{}] {}".format(child_list.index(child), child))
 
     return
-
 
 def change_dir():
     """Change the current working directory to a child/parent directory.
@@ -144,9 +114,9 @@ def change_dir():
     User is prompted to select a new directory by entering the associated
     number. The function returns user input as dir_number.
 
-    An additional option of 'X' is used to confirm the current directory
-    by returning False, discontinuing the loop in the function
-    browse_dir() that change_dir is called in.
+    The user can select the current directory as the new working directory
+    by selecting 0, causing the function to return False, and terminating
+    the loop within which change_dir() is called in browse_dir().
     """
 
     # Obtains and prints the current working directory, and prints the
@@ -154,38 +124,35 @@ def change_dir():
     current_dir = os.getcwd()
     print(current_dir)
     child_list = list_children(current_dir)
-    child_dict = create_child_dict(child_list)
-    display_children(child_dict)
+    display_children(child_list)
 
-    # Collect input from user to change the directory
-    dir_number = input("Enter a number to select the corresponding "
-                       "directory, or 'X' to confirm current "
-                       "directory: ")
-
-    # Change the directory according to user input
-    if dir_number == "0":
-        os.chdir(os.path.dirname(current_dir))
-    elif dir_number == "X" or dir_number == "x":
-        dir_number = False
+    # Collect input from user and change the directory using the input to
+    # index the child_list
+    dir_number = int(input("Enter a number to select the corresponding "
+                           "directory, or 0 to confirm current "
+                           "directory: "))
+    if dir_number == 0:
+        return dir_number
     else:
-        sub_dir = child_dict[int(dir_number)]
-        os.chdir(os.path.join(current_dir, sub_dir))
+        if child_list[dir_number] == "..":
+            os.chdir(os.path.dirname(current_dir))
+        else:
+            sub_dir = child_list[dir_number]
+            os.chdir(os.path.join(current_dir, sub_dir))
 
     return dir_number
-
 
 def browse_dir():
     """Loop change_dir() to browse directory tree, and catch exceptions.
 
     Loops change_dir(), checking the output each time that dir_number is
-    True. If False the loop is terminated. This function catches any
-    exceptions encountered by change_dir() while attempting to change
-    the directory.
+    True. If False the loop is terminated and the current directory set
+    as the working directory. This function also catches any exceptions
+    encountered by change_dir() while attempting to change the directory.
     """
 
     # Generate loop to repeatedly request user to change directory while
     # checking the output of change_dir() and continuing loop while True
-    # and catching specific exceptions
     while True:
         try:
             dir_number = change_dir()
@@ -205,29 +172,36 @@ def browse_dir():
     return
 
 
-def select_files(file_list):
+def select_files(file_filter=None):
     """Generate a list of files as specified by user input.
 
-    Files are selected by their number associated in the child_dict
+    Files are selected by their number associated in the child_list
     object.
 
     To implement:
     - Enable selecting a subset of files instead of simply all or one
     """
 
-    # Generate child_dict object with create_child_dict function from
-    # the file_list and display with display_children()
-    child_dict = create_child_dict(file_list, show_parent=False)
-    display_children(child_dict)
+    # Generate and display a list of the files in the current working
+    # directory, filtered by file type if an argument is given
+    directory = os.getcwd()
+    child_list = list_children(directory, filter_type="file",
+                               file_filter=file_filter, show_parent=False)
+    display_children(child_list)
 
-    # Prompt user to input files to select
     file_select = input("Select a file using the associated number, or"
                         " 'all' to select all files: ")
 
     # Splice file_list according to user input and return a new list
+    # The first, placeholder item in child_list is removed if 'all' selected
     if file_select == "all":
-        file_list = file_list
+        file_list = child_list[1::]
     else:
-        file_list = [file_list[int(file_select)]]
+        file_list = [child_list[int(file_select)]]
 
     return file_list
+
+
+# Run browse_dir() to test code
+browse_dir()
+select_files()
