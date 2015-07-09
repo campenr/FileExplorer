@@ -39,23 +39,24 @@ def list_children(directory, filter_type="none"):
     'dir'   - Filter only allows directories
     """
 
+    list_dir = os.listdir(directory)
 
     # Get the list of children in the current directory, filtered
     # according to filter_type
     if filter_type == "none":
-        child_list = os.listdir(directory)
+        child_list = list_dir
     elif filter_type == "file":
-        child_list = [child for child in os.listdir(directory)
+        child_list = [child for child in list_dir
                       if os.path.isfile(child)]
     elif filter_type == "dir":
-        child_list = [child for child in os.listdir(directory)
+        child_list = [child for child in list_dir
                       if os.path.isdir(child)]
 
     # If an incorrect filter_type is entered the default 'none' is
     # selected and a message printed to notify user
     else:
         print("Invalid filter selected, default of 'none' chosen")
-        child_list = os.listdir(directory)
+        child_list = list_dir
 
     return child_list
 
