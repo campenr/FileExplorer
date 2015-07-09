@@ -45,12 +45,21 @@ the above format.
 The select_files() function displays the file child objects of the
 current working directory, and allows the user to specify whether to
 select all files or a single file, returning a list of the selected 
-file(s). The files viewed using selct_files() can be filtered for a 
+file(s). The files viewed using select_files() can be filtered for a
 specific file type by preprocessing the file_list object passed to 
 select_files() with the function filter_file_type(), and specifying 
 the file suffix of the files to be returned. Optionally, 
 user_input_file_type(), a wrapper for filter_file_type, prompts the
 user to enter a file type suffix at the command line.
+
+ToDo
+----
+
+- Update documentation to give better usage examples
+- Add support for selecting subsets of files instead of only all or 1
+- Alter reporting of current directory if path is more than n items to
+  display the current path in a more friendly way
+- 
 
 
 License

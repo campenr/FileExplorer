@@ -8,7 +8,7 @@
 dirbrowser version 1.0a2
 ========================
 
-This module includes a number of functions that provide basic direcotry
+This module includes a number of functions that provide basic directory
 browser functionality in an easy to view format within a command 
 line environment, e.g. Windows shell. Using the two main functions
 browse_dir() and select_files() in combination allows the user
@@ -17,13 +17,15 @@ a list of files within that directory, optionally filtered by file
 type. This list of files can then be utilised by other scripts.
 
 TODO:
-- Create a demo in this docstring that can be exectuted to demonsrate
-the modules functionality.
+- Change use of a dictionary and keys to using a list and list indicies
+  for the child_dict object
+- Change filter_file_type to use .split to identify file type
 
 See README.txt for full documentation.
 """
 
 import os
+
 
 def list_children(directory, filter_type="none"):
     """Create a list of the children in 'directory'.
@@ -37,7 +39,7 @@ def list_children(directory, filter_type="none"):
     'dir'   - Filter only allows directories
     """
 
-       
+
     # Get the list of children in the current directory, filtered
     # according to filter_type
     if filter_type == "none":
@@ -48,14 +50,15 @@ def list_children(directory, filter_type="none"):
     elif filter_type == "dir":
         child_list = [child for child in os.listdir(directory)
                       if os.path.isdir(child)]
-            
+
     # If an incorrect filter_type is entered the deafult 'none' is
     # selected and a message printed to notify user
     else:
         print("Invalid filter selected, deafult of 'none' chosen")
         child_list = os.listdir(directory)
- 
+
     return child_list
+
 
 def filter_file_type(file_list, file_type):
     """Filter a list of files by 'file type'.
@@ -68,8 +71,9 @@ def filter_file_type(file_list, file_type):
     # including files that have ends matching the given file_type
     file_list = [file for file in file_list
                  if file.endswith(file_type)]
-    
+
     return file_list
+
 
 def user_input_file_type(file_list):
     """Implement filter_file_type with user input file_type.
@@ -83,6 +87,7 @@ def user_input_file_type(file_list):
     file_list = filter_file_type(file_list, file_type)
 
     return file_list
+
 
 def create_child_dict(child_list, show_parent=True):
     """Build a dicitonary of child object values, and numeric keys.
@@ -99,8 +104,9 @@ def create_child_dict(child_list, show_parent=True):
 
     # Generate dictionary from enumerating child_list
     child_dict = dict(enumerate(child_list))
-    
+
     return child_dict
+
 
 def display_children(child_dict):
     """Print child_dict in an easy to read format.
@@ -115,15 +121,16 @@ def display_children(child_dict):
     [3] File2.txt
     [4] Folder2
     """
- 
+
     # Create a sorted list of the keys from the child dictionary
     child_key_list = sorted(child_dict.keys())
-               
+
     # Print each key/value pair in an easy to read manner
     for n in child_key_list:
-        print("[{}] {}".format(child_key_list[n], child_dict[n])) 
+        print("[{}] {}".format(child_key_list[n], child_dict[n]))
 
     return
+
 
 def change_dir():
     """Change the current working directory to a child/parent directory.
@@ -148,11 +155,11 @@ def change_dir():
     child_list = list_children(current_dir)
     child_dict = create_child_dict(child_list)
     display_children(child_dict)
-    
+
     # Collect input from user to change the directory
     dir_number = input("Enter a number to select the corresponding "
-                        "directory, or 'X' to confirm current "
-                        "directory: ")
+                       "directory, or 'X' to confirm current "
+                       "directory: ")
 
     # Change the directory according to user input
     if dir_number == "0":
@@ -162,7 +169,7 @@ def change_dir():
     else:
         sub_dir = child_dict[int(dir_number)]
         os.chdir(os.path.join(current_dir, sub_dir))
-        
+
     return dir_number
 
 
@@ -182,7 +189,7 @@ def browse_dir():
         try:
             dir_number = change_dir()
             if not dir_number:
-                print(("\nSelected working directory is {}\n")
+                print("\nSelected working directory is {}\n"
                       .format(os.getcwd()))
                 return
         except NotADirectoryError:
@@ -196,6 +203,7 @@ def browse_dir():
                   "administrator\n")
     return
 
+
 def select_files(file_list):
     """Generate a list of files as specified by user input.
 
@@ -205,7 +213,7 @@ def select_files(file_list):
     To implement:
     - Enable selecting a subset of files instead of simply all or one
     """
-    
+
     # Generate child_dict object with create_child_dict funciton from
     # the file_list and display with display_children()
     child_dict = create_child_dict(file_list, show_parent=False)
@@ -222,4 +230,3 @@ def select_files(file_list):
         file_list = [file_list[int(file_select)]]
 
     return file_list
-
