@@ -34,20 +34,20 @@ directory, providing the browsing funcitonality.
 Usage
 -----
 
-You can browse the directory tree by calling browse_dir as follows:
-::
-from dirbrowser import dirbrowser
-dirbrowser.browse_dir()
+You can browse the directory tree by calling browse_dir as follows: ::
+
+  from dirbrowser import dirbrowser
+  dirbrowser.browse_dir()
 
 The function browse_dir is a wrapper for change_dir that calls another
 function list_children, to create a list of all child items in the
 current directory and display them. change_dir then takes the user input
 and sets the new working directory accordingly.
 
-To display the files within a directory and select a subset (all or one):
-::
-from dirbrowser import dirbrowser
-dirbrowser.select_files()
+To display the files within a directory and select a subset (all or one): ::
+
+  from dirbrowser import dirbrowser
+  dirbrowser.select_files()
 
 The function select_files calls list_children with specific filter
 arguments to show only files, and optionally files of a specific type.
