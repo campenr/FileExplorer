@@ -1,8 +1,6 @@
 #!/usr/bin/python3
 
-"""Setup.py for dirbrowser.
-
-"""
+"""Setup.py for dirbrowser."""
 
 from setuptools import setup, find_packages
 
@@ -18,13 +16,15 @@ with open(path.join(here, 'README.rst'), encoding='utf-8') as f:
 
 setup(
     name="dirbrowser",
-    version="1.0a2",
+    version="1.0a3",
     description="Command line based directory browser",
     long_description=long_description,
     url="https://github.com/campenr/dirbrowser",
     author="Richard Campen",
     author_email="richard@campen.co",
     license="BSD License",
+
+    # TODO add more classifiers (e.g. platform)
 
     classifiers=[
         "Development Status :: 3 - Alpha",
@@ -40,4 +40,7 @@ setup(
     keywords="directory browser interface",
     packages=find_packages(),
     include_package_data=True
+
+    # TODO add entry into scripts folder
+
 )

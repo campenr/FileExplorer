@@ -1,6 +1,5 @@
-dirbrowser version 1.0a2
+dirbrowser version 1.0a3
 ========================
-
 
 Bugs and issue tracking
 -----------------------
@@ -10,52 +9,61 @@ date only been performed with Windows 8.1 Pro using cmd.exe. Bug
 reports should be submitted via the github issue tracker.
 
 
-Usage
------
+Description
+-----------
 
 This module is built for python 3, and is not backwards compatible
 with python 2. 
 
 This module includes a number of functions that provide basic 
 directory browser functionality, in an easy to view format, within a 
-command line environment, e.g. cmd.exe. Using the main function
-browse_dir() allows the user to browse the directory tree and set the
-current working directory. Another function, select_files() can be 
-used to return a list of files within that directory, optionally 
-filtered by file type.
+command line environment, e.g. cmd.exe. The display of the directory
+is formatted as follows, where the '..', represents the parent directory: ::
 
-The display of the directory is formatted as follows, where the 
-ellipsis, '...', represents the parent directory: ::
+[1] ..
+[2] Folder1
+[3] File1.py
+[4] File2.txt
+[5] Folder2
+Enter a number to select the corresponding directory, or 0 to confirm
+current directory:
 
-[0] ...
-[1] Folder1
-[2] File1.py
-[3] File2.txt
-[4] Folder2
+Entering the number corresponding to the desired directory changes to that
+directory, providing the browsing funcitonality.
 
-Using browse_dir() the children within a directory can be viewed,
-the directory tree traversed, and the working directory set. The
-browse_dir() function is a wrapper for the change_dir() function
-that creates and displays the children of the current directory.
-This is done with with calls to create_child_dict(), which takes a
-list of children and adds to a dictionary object, and 
-display_children() which displays the contents of the dictionary in
-the above format.
+Usage
+-----
 
-The select_files() function displays the file child objects of the
-current working directory, and allows the user to specify whether to
-select all files or a single file, returning a list of the selected 
-file(s). The files viewed using select_files() can be filtered for a
-specific file type by preprocessing the file_list object passed to 
-select_files() with the function filter_file_type(), and specifying 
-the file suffix of the files to be returned. Optionally, 
-user_input_file_type(), a wrapper for filter_file_type, prompts the
-user to enter a file type suffix at the command line.
+You can browse the directory tree by calling browse_dir as follows: ::
+
+from dirbrowser import dirbrowser
+dirbrowser.browse_dir()
+
+The function browse_dir is a wrapper for change_dir that calls another
+function list_children, to create a list of all child items in the
+current directory and display them. change_dir then takes the user input
+and sets the new working directory accordingly.
+
+To display the files within a directory and select a subset (all or one): ::
+
+from dirbrowser import dirbrowser
+dirbrowser.select_files()
+
+The function select_files calls list_children with specific filter
+arguments to show only files, and optionally files of a specific type.
+
+For a full description of these functions run ``help(dirbrowser)``
+
+Installation
+------------
+
+Download source package and run ``setup.py install`` or alternativley
+``pip3 install dirbrowser --pre``. A binary wheel distribution is also
+available at PyPI_(https://pypi.python.org/pypi/dirbrowser).
 
 TODO
 ----
 
-- Update documentation to give better usage examples
 - Add support for selecting subsets of files instead of only all or 1
 - Alter reporting of current directory if path is more than n items to
   display the current path in a more friendly way

@@ -1,1 +1,1 @@
-# dirbrowser 1.0a2
+# dirbrowser 1.0a3

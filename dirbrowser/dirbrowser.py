@@ -5,22 +5,14 @@
 
 """Module that enables basic file/directory browser functionality.
 
-dirbrowser version 1.0a2
+dirbrowser version 1.0a3
 ========================
 
 This module includes a number of functions that provide basic directory
-browser functionality in an easy to view format within a command 
-line environment, e.g. Windows shell. Using the two main functions
-browse_dir() and select_files() in combination allows the user
-to browse the directory tree and set a working directory, and return
-a list of files within that directory, optionally filtered by file
-type. This list of files can then be utilised by other scripts.
+browser functionality in an easy to view format, within a command
+line environment, e.g. the Windows command shell.
 
-TODO:
-- add support for selecting multiple files in select_files() instead
-  of either all or one
-
-See README.txt for full documentation.
+For complete documentation see README.rst.
 """
 
 import os
@@ -39,45 +31,43 @@ def list_children(directory, filter_type=None, file_filter=None,
 
     If filter_type is set to "file", the child_list can be additionally
     filtered by the files extension by setting file_filter, which takes
-    a string and matches it to the file name. If no files have a matching
-    extension the resulting child_list will be empty.
+    a string and matches it to the file name. The file_filter argument
+    must be a string which matches the file extension, with or without
+    the period i.e. both '.txt', and 'txt' are valid arguments.
+
+    NOTE: If no files have a matching extension the resulting child_list
+    will be empty.
     """
 
-    child_list = list()
     list_dir = os.listdir(directory)
 
-    # Get the list of children in the current directory, filtered
-    # according to filter_type
+    # Filter children to files of directories
+    # TODO refactor these conditionals to be more concise
     if filter_type == "dir":
         child_list = [child for child in list_dir
                       if os.path.isdir(child)]
-    elif filter_type is None or filter_type == "file":
-        if filter_type is None:
-            child_list = list_dir
-            # If filter_type is none then file_filter is set to None
-            file_filter = None
-        elif filter_type == "file":
-            child_list = [child for child in list_dir
-                          if os.path.isfile(child)]
-
-    # If an incorrect filter_type is entered the default 'None' is
-    # selected and a message printed to notify user
+    elif filter_type is None:
+        child_list = list_dir
+    elif filter_type == "file":
+        child_list = [child for child in list_dir
+                      if os.path.isfile(child)]
     else:
         print("Invalid filter selected, default of 'None' chosen")
         child_list = list_dir
 
-    # Filter files by file_filter if filter_type = "file"
-    if filter_type == "file":
-        if file_filter is not None:
-            child_list = [child for child in child_list
-                          if child.endswith(file_filter)]
+    # Filter files by file type
+    if filter_type == "file" and file_filter is not None:
+        child_list = [child for child in child_list
+                      if child.endswith(file_filter)]
 
-    # Prepend child_list with ".." placeholder for parent directory
-    # if show_parent=True
+    # Use a '..' placeholder for parent directory when listing
+    # directories.
     if show_parent is True:
         child_list.insert(0, "..")
 
-    # Prepend child_list with an empty placeholder at 0th index
+    # Use an empty placeholder at 0th index so child indices
+    # start at 1.
+    # TODO use '.' and display?
     child_list.insert(0, "")
 
     return child_list
@@ -85,10 +75,9 @@ def list_children(directory, filter_type=None, file_filter=None,
 def display_children(child_list):
     """Print child_list in an easy to read format.
 
-    Takes the child_list object and displays it in an easy to read
-    manner, with their indices for easy selection as shows:
+    Displays children and their indices for easy selection as shown:
 
-    [1] ...
+    [1] ..
     [2] Folder1
     [3] File1.py
     [4] File2.txt
@@ -97,6 +86,8 @@ def display_children(child_list):
     The 0th index is hidden and is a placeholder for selecting the
     current working directory.
     """
+
+    # TODO Does this deserve it's own function? Place this into create_child_list?
 
     for child in child_list[1::]:
         print("[{}] {}".format(child_list.index(child), child))
@@ -115,12 +106,11 @@ def change_dir():
     number. The function returns user input as dir_number.
 
     The user can select the current directory as the new working directory
-    by selecting 0, causing the function to return False, and terminating
-    the loop within which change_dir() is called in browse_dir().
+    by selecting 0.
     """
 
     # Obtains and prints the current working directory, and prints the
-    # children by calling the list_children() function
+    # children by calling the list_children
     current_dir = os.getcwd()
     print(current_dir)
     child_list = list_children(current_dir)
@@ -143,16 +133,13 @@ def change_dir():
     return dir_number
 
 def browse_dir():
-    """Loop change_dir() to browse directory tree, and catch exceptions.
+    """Loop change_dir to browse directory tree, and catch exceptions.
 
-    Loops change_dir(), checking the output each time that dir_number is
+    Loops change_dir, checking the output each time that dir_number is
     True. If False the loop is terminated and the current directory set
-    as the working directory. This function also catches any exceptions
-    encountered by change_dir() while attempting to change the directory.
+    as the working directory.
     """
 
-    # Generate loop to repeatedly request user to change directory while
-    # checking the output of change_dir() and continuing loop while True
     while True:
         try:
             dir_number = change_dir()
@@ -175,8 +162,7 @@ def browse_dir():
 def select_files(file_filter=None):
     """Generate a list of files as specified by user input.
 
-    Files are selected by their number associated in the child_list
-    object.
+    See list_children for valid file_filter arguments.
 
     To implement:
     - Enable selecting a subset of files instead of simply all or one
@@ -194,6 +180,9 @@ def select_files(file_filter=None):
 
     # Splice file_list according to user input and return a new list
     # The first, placeholder item in child_list is removed if 'all' selected
+
+    # TODO wrap this in a try statement to catch invalid inputs
+
     if file_select == "all":
         file_list = child_list[1::]
     else:
@@ -202,6 +191,6 @@ def select_files(file_filter=None):
     return file_list
 
 
-# Run browse_dir() to test code
+# Run browse_dir() and test_dir() to demo code
 browse_dir()
 select_files()
