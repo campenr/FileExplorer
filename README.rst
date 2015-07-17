@@ -35,9 +35,7 @@ Usage
 -----
 
 You can browse the directory tree by calling browse_dir as follows:
-
 ::
-
 from dirbrowser import dirbrowser
 dirbrowser.browse_dir()
 
@@ -47,9 +45,7 @@ current directory and display them. change_dir then takes the user input
 and sets the new working directory accordingly.
 
 To display the files within a directory and select a subset (all or one):
-
 ::
-
 from dirbrowser import dirbrowser
 dirbrowser.select_files()
 
