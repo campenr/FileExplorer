@@ -34,7 +34,9 @@ directory, providing the browsing funcitonality.
 Usage
 -----
 
-You can browse the directory tree by calling browse_dir as follows: ::
+You can browse the directory tree by calling browse_dir as follows:
+
+::
 
 from dirbrowser import dirbrowser
 dirbrowser.browse_dir()
@@ -44,7 +46,9 @@ function list_children, to create a list of all child items in the
 current directory and display them. change_dir then takes the user input
 and sets the new working directory accordingly.
 
-To display the files within a directory and select a subset (all or one): ::
+To display the files within a directory and select a subset (all or one):
+
+::
 
 from dirbrowser import dirbrowser
 dirbrowser.select_files()
@@ -57,9 +61,9 @@ For a full description of these functions run ``help(dirbrowser)``
 Installation
 ------------
 
-Download source package and run ``setup.py install`` or alternativley
-``pip3 install dirbrowser --pre``. A binary wheel distribution is also
-available at PyPI_(https://pypi.python.org/pypi/dirbrowser).
+Download source package and run ``setup.py install`` or alternativley via
+pip with ``pip3 install dirbrowser --pre``. A binary wheel distribution is also
+available at PyPI (https://pypi.python.org/pypi/dirbrowser).
 
 TODO
 ----
