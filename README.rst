@@ -36,8 +36,8 @@ Usage
 
 You can browse the directory tree by calling browse_dir as follows: ::
 
-from dirbrowser import dirbrowser
-dirbrowser.browse_dir()
+  from dirbrowser import dirbrowser
+  dirbrowser.browse_dir()
 
 The function browse_dir is a wrapper for change_dir that calls another
 function list_children, to create a list of all child items in the
@@ -46,8 +46,8 @@ and sets the new working directory accordingly.
 
 To display the files within a directory and select a subset (all or one): ::
 
-from dirbrowser import dirbrowser
-dirbrowser.select_files()
+  from dirbrowser import dirbrowser
+  dirbrowser.select_files()
 
 The function select_files calls list_children with specific filter
 arguments to show only files, and optionally files of a specific type.
@@ -57,9 +57,9 @@ For a full description of these functions run ``help(dirbrowser)``
 Installation
 ------------
 
-Download source package and run ``setup.py install`` or alternativley
-``pip3 install dirbrowser --pre``. A binary wheel distribution is also
-available at PyPI_(https://pypi.python.org/pypi/dirbrowser).
+Download source package and run ``setup.py install`` or alternativley via
+pip with ``pip3 install dirbrowser --pre``. A binary wheel distribution is also
+available at PyPI (https://pypi.python.org/pypi/dirbrowser).
 
 TODO
 ----
