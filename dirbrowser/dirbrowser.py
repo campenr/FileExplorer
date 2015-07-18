@@ -189,8 +189,3 @@ def select_files(file_filter=None):
         file_list = [child_list[int(file_select)]]
 
     return file_list
-
-
-# Run browse_dir() and test_dir() to demo code
-browse_dir()
-select_files()
