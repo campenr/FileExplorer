@@ -5,7 +5,7 @@
 
 """Module that enables basic file/directory browser functionality.
 
-dirbrowser version 1.0a3
+dirbrowser version 1.0b1
 ========================
 
 This module includes a number of functions that provide basic directory

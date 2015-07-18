@@ -1,3 +1,6 @@
+# ignore yourself
+.gitignore
+
 # Build folders
 build
 dirbrowser.egg-info

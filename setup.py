@@ -16,7 +16,7 @@ with open(path.join(here, 'README.rst'), encoding='utf-8') as f:
 
 setup(
     name="dirbrowser",
-    version="1.0a3",
+    version="1.0b1",
     description="Command line based directory browser",
     long_description=long_description,
     url="https://github.com/campenr/dirbrowser",
@@ -27,7 +27,7 @@ setup(
     # TODO add more classifiers (e.g. platform)
 
     classifiers=[
-        "Development Status :: 3 - Alpha",
+        "Development Status :: 4 - Beta",
         "Intended Audience :: Developers",
         "Topic :: Software Development :: User Interfaces",
         "License :: OSI Approved :: BSD License",

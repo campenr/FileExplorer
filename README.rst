@@ -1,4 +1,4 @@
-dirbrowser version 1.0a3
+dirbrowser version 1.0b1
 ========================
 
 Bugs and issue tracking
