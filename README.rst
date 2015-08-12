@@ -1,5 +1,11 @@
-dirbrowser version 1.0b1
+dirbrowser version 1.0b2
 ========================
+
+What's new
+----------
+
+- Added function to trim paths if they contain more than 7 levels
+- Changed browse_dir to return the current working directory (see updated usage)
 
 Bugs and issue tracking
 -----------------------
@@ -69,22 +75,20 @@ saving and for opening files, and processing a selection of the files: ::
       # Do things to file
       os.chdir(save_dir)
       # Save new file in new location
-      
+
 For a full description of these functions run ``help(dirbrowser)``
 
 Installation
 ------------
 
 Download source package and run ``setup.py install`` or alternativley via
-pip with ``pip3 install dirbrowser --pre``. A binary wheel distribution is also
+pip with ``pip3 install dirbrowser``. A binary wheel distribution is also
 available at PyPI (https://pypi.python.org/pypi/dirbrowser).
 
 TODO
 ----
 
 - Add support for selecting subsets of files instead of only all or 1
-- Alter reporting of current directory if path is more than n items to
-  display the current path in a more friendly way
 
 
 License
