@@ -162,7 +162,7 @@ def browse_dir():
             if not dir_number:
                 print("\nSelected working directory is {}\n"
                       .format(clean_path(os.getcwd())))
-                return
+                return os.getcwd()
         except NotADirectoryError:
             print("\nThat is not a valid directory\n")
         except ValueError:
@@ -172,9 +172,7 @@ def browse_dir():
         except PermissionError:
             print("\nInsufficient permissions. Try running as "
                   "administrator\n")
-
-    return
-
+            
 
 def select_files(file_filter=None):
     """Generate a list of files as specified by user input.
@@ -209,5 +207,6 @@ def select_files(file_filter=None):
 
 if __name__ == "__main__":
     # execute only if run as a script
-    browse_dir()
-    select_files()
+    my_dir = browse_dir()
+    print(my_dir)
+    #select_files()
