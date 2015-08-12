@@ -29,7 +29,7 @@ Enter a number to select the corresponding directory, or 0 to confirm
 current directory:
 
 Entering the number corresponding to the desired directory changes to that
-directory, providing the browsing funcitonality.
+directory, providing the browsing functionality.
 
 Usage
 -----
