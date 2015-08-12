@@ -39,9 +39,9 @@ def list_children(directory, filter_type=None, file_filter=None,
     will be empty.
     """
 
-    list_dir = (child for child in os.listdir(directory))
-    
-    # Filter children to files of directories
+    list_dir = os.listdir(directory)
+
+    # Filter children to files or directories
     # TODO refactor these conditionals to be more concise
     if filter_type == "dir":
         child_list = [child for child in list_dir
@@ -89,8 +89,9 @@ def display_children(child_list):
 
     # TODO Does this deserve it's own function? Place this into create_child_list?
 
-    for child in child_list[1::]:
-        print("[{}] {}".format(child_list.index(child), child))
+    for idx, child in enumerate(child_list):
+        if idx != 0:
+            print("[{index}] {child_item}".format(index=idx, child_item=child))
 
     return
 
@@ -190,6 +191,7 @@ def select_files(file_filter=None):
 
     return file_list
 
-files = select_files()
-print(files)
-print(type(files))
+if __name__ == "__main__":
+    # execute only if run as a script
+    browse_dir()
+    select_files()
