@@ -41,8 +41,8 @@ You can browse the directory tree by calling browse_dir as follows: ::
 
 The function browse_dir is a wrapper for change_dir that calls another
 function list_children, to create a list of all child items in the
-current directory and display them. change_dir then takes the user input
-and sets the new working directory accordingly.
+current directory and display them. change_dir then takes the user input sets
+the new working direcotry, and returns the current working directory on termination.
 
 To display the files within a directory and select a subset (all or one): ::
 
@@ -52,6 +52,24 @@ To display the files within a directory and select a subset (all or one): ::
 The function select_files calls list_children with specific filter
 arguments to show only files, and optionally files of a specific type.
 
+Used in combination, these functions can be used to set directories for
+saving and for opening files, and processing a selection of the files: ::
+
+  from dirbrowser import dirbrowser
+  origin = os.getcwd()
+  # Set save directory
+  save_dir = dirbrowser.browse_dir()
+  # Reset directory to original location
+  os.chdir(origin)
+  # Navigate to files to process
+  open_dir = dirbrowser.browse_dir()
+  files = dirbrowser.select_files()
+  for file in files:
+      os.chdir(open_dir)
+      # Do things to file
+      os.chdir(save_dir)
+      # Save new file in new location
+      
 For a full description of these functions run ``help(dirbrowser)``
 
 Installation
