@@ -39,8 +39,8 @@ def list_children(directory, filter_type=None, file_filter=None,
     will be empty.
     """
 
-    list_dir = os.listdir(directory)
-
+    list_dir = (child for child in os.listdir(directory))
+    
     # Filter children to files of directories
     # TODO refactor these conditionals to be more concise
     if filter_type == "dir":
@@ -189,3 +189,7 @@ def select_files(file_filter=None):
         file_list = [child_list[int(file_select)]]
 
     return file_list
+
+files = select_files()
+print(files)
+print(type(files))
