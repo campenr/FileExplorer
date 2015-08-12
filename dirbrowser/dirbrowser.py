@@ -5,7 +5,7 @@
 
 """Module that enables basic file/directory browser functionality.
 
-dirbrowser version 1.0b1
+dirbrowser version 1.0b2
 ========================
 
 This module includes a number of functions that provide basic directory
@@ -172,7 +172,7 @@ def browse_dir():
         except PermissionError:
             print("\nInsufficient permissions. Try running as "
                   "administrator\n")
-            
+
 
 def select_files(file_filter=None):
     """Generate a list of files as specified by user input.
@@ -207,6 +207,5 @@ def select_files(file_filter=None):
 
 if __name__ == "__main__":
     # execute only if run as a script
-    my_dir = browse_dir()
-    print(my_dir)
-    #select_files()
+    browse_dir()
+    select_files()
