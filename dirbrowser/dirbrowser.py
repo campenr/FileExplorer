@@ -35,6 +35,9 @@ def list_children(directory, filter_type=None, file_filter=None,
     must be a string which matches the file extension, with or without
     the period i.e. both '.txt', and 'txt' are valid arguments.
 
+    .. todo:: Change the way this is done so that we don't use ends with. Instead split on '.', and check if the last
+        element matches the supplied file extension. Drop support for supplying extensions with the proceeding '.'.
+
     NOTE: If no files have a matching extension the resulting child_list
     will be empty.
     """
@@ -179,8 +182,11 @@ def select_files(file_filter=None):
 
     See list_children for valid file_filter arguments.
 
-    To implement:
-    - Enable selecting a subset of files instead of simply all or one
+    Files can be selected by inputting a single number, inputting a range of number by specifying a hyphen separated
+    start and stop position (numbers are inclusive), or a comma separated list of a combination of the above.
+
+    To select all files the option 'all' can be used instead of manually specifying the range.
+
     """
 
     # Generate and display a list of the files in the current working
@@ -193,19 +199,64 @@ def select_files(file_filter=None):
     file_select = input("Select a file using the associated number, or"
                         " 'all' to select all files: ")
 
-    # Splice file_list according to user input and return a new list
-    # The first, placeholder item in child_list is removed if 'all' selected
-
-    # TODO wrap this in a try statement to catch invalid inputs
+    file_list = []
+    file_select = file_select.replace(' ', '')
 
     if file_select == "all":
-        file_list = child_list[1::]
+        file_list.extend(child_list[1::])
+
     else:
-        file_list = [child_list[int(file_select)]]
+        # get comma separated arguments
+        file_selections = file_select.split(',')
+
+        # if there was only one argument passed without commas then return that file
+        if len(file_selections) == 1:
+
+            files = file_selections[0].split('-')
+
+            print('files: ', files)
+
+            len_files = len(files)
+
+            # a length 1 then assume only a single number given
+            if len_files == 1:
+                file_list.append(child_list[int(files[0])])
+
+            # a length of two suggests that only a start or end was specified
+            # if the length is longer than two, we ignore the middle numbers and only consider the first/last
+            if len_files >= 2:
+
+                start_ = int(files[0])
+                stop_ = int(files[-1]) + 1
+
+                file_list.extend(child_list[start_:stop_])
+
+
+        # multiple comma separated elements were entered
+        else:
+
+            for file_selection in file_selections:
+
+                files = file_selection.split('-')
+                len_files = len(files)
+
+                # a length 1 then assume only a single number given
+                if len_files == 1:
+                    file_list.append(child_list[int(files[0])])
+
+                # a length of two suggests that only a start or end was specified
+                # if the length is longer than two, we ignore the middle numbers and only consider the first/last
+                if len_files >= 2:
+
+                    start_ = int(files[0])
+                    stop_ = int(files[-1]) + 1
+                    file_list.extend(child_list[start_:stop_])
 
     return file_list
+
 
 if __name__ == "__main__":
     # execute only if run as a script
     browse_dir()
-    select_files()
+    files_ = select_files()
+    print(files_)
