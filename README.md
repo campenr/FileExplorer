@@ -1,11 +1,11 @@
-dirbrowser version 1.0b2
+dirbrowser version 0.1.0
 ========================
 
 What's new
 ----------
 
-- Added function to trim paths if they contain more than 7 levels
-- Changed browse_dir to return the current working directory (see updated usage)
+- To specify files to select you can now enter either a single file, or a range of files by specifying hypen separated
+start and stop file numbers (inclusive), or a comma separated combination of any/all of the above.
 
 Bugs and issue tracking
 -----------------------
@@ -21,18 +21,15 @@ Description
 This module is built for python 3, and is not backwards compatible
 with python 2. 
 
-This module includes a number of functions that provide basic 
-directory browser functionality, in an easy to view format, within a 
-command line environment, e.g. cmd.exe. The display of the directory
-is formatted as follows, where the '..', represents the parent directory: ::
+This module includes a number of functions that provide basic directory browser functionality within the python
+interpreter. The display of the directory is formatted as follows, where the '..', represents the parent directory: ::
 
-[1] ..
-[2] Folder1
-[3] File1.py
-[4] File2.txt
-[5] Folder2
-Enter a number to select the corresponding directory, or 0 to confirm
-current directory:
+  [1] ..
+  [2] Folder1
+  [3] File1.py
+  [4] File2.txt
+  [5] Folder2
+  Enter a number to select the corresponding directory, or 0 to confirm current directory:
 
 Entering the number corresponding to the desired directory changes to that
 directory, providing the browsing functionality.
@@ -81,14 +78,14 @@ For a full description of these functions run ``help(dirbrowser)``
 Installation
 ------------
 
-Download source package and run ``setup.py install`` or alternativley via
-pip with ``pip3 install dirbrowser``. A binary wheel distribution is also
-available at PyPI (https://pypi.python.org/pypi/dirbrowser).
+Download the latest source package and run ``setup.py install`` or alternatively install the latest release via
+pip with ``pip install dirbrowser``. A binary wheel distribution of the latest release is also available at PyPI (https://pypi.python.org/pypi/dirbrowser).
 
 TODO
 ----
 
-- Add support for selecting subsets of files instead of only all or 1
+ - Add more checking of valid inputs when selecting files
+
 
 
 License

@@ -5,14 +5,14 @@
 
 """Module that enables basic file/directory browser functionality.
 
-dirbrowser version 1.0b2
+dirbrowser version 0.1.0
 ========================
 
 This module includes a number of functions that provide basic directory
 browser functionality in an easy to view format, within a command
 line environment, e.g. the Windows command shell.
 
-For complete documentation see README.rst.
+For complete documentation see README.md.
 """
 
 import os

@@ -1,1 +1,1 @@
-# dirbrowser 1.0b2
+# dirbrowser v0.1.0
