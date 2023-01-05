@@ -17,6 +17,14 @@ For complete documentation see README.md.
 
 import os
 
+
+def main():
+    # execute only if run as a script
+    browse_dir()
+    files_ = select_files()
+    print(files_)
+
+
 def list_children(directory, filter_type=None, file_filter=None,
                   show_parent=True):
     """Create a list of the children in 'directory'.
@@ -75,6 +83,7 @@ def list_children(directory, filter_type=None, file_filter=None,
 
     return child_list
 
+
 def display_children(child_list):
     """Print child_list in an easy to read format.
 
@@ -98,6 +107,7 @@ def display_children(child_list):
 
     return
 
+
 def clean_path(current_dir):
     """Clean path to only show the top three, and bottom two levels.
 
@@ -115,7 +125,7 @@ def clean_path(current_dir):
 
 def change_dir():
     """Change the current working directory to a child/parent directory.
- 
+
     This function is intended to operate within a loop provided by
     another function, browse_dir().
 
@@ -150,6 +160,7 @@ def change_dir():
             os.chdir(os.path.join(current_dir, sub_dir))
 
     return dir_number
+
 
 def browse_dir():
     """Loop change_dir to browse directory tree, and catch exceptions.
@@ -231,7 +242,6 @@ def select_files(file_filter=None):
 
                 file_list.extend(child_list[start_:stop_])
 
-
         # multiple comma separated elements were entered
         else:
 
@@ -256,7 +266,4 @@ def select_files(file_filter=None):
 
 
 if __name__ == "__main__":
-    # execute only if run as a script
-    browse_dir()
-    files_ = select_files()
-    print(files_)
+    raise SystemExit(main())

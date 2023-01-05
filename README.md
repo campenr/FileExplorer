@@ -19,7 +19,7 @@ Description
 -----------
 
 This module is built for python 3, and is not backwards compatible
-with python 2. 
+with python 2.
 
 This module includes a number of functions that provide basic directory browser functionality within the python
 interpreter. The display of the directory is formatted as follows, where the '..', represents the parent directory: ::
@@ -91,5 +91,5 @@ TODO
 License
 -------
 
-This software is released under the Modified BSD license. See 
+This software is released under the Modified BSD license. See
 LICENSE.txt for the full license.

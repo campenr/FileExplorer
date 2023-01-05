@@ -10,7 +10,3 @@ dist
 # dev folders
 dirbrowser/__pycache__
 venv/
-
-# Windows image file caches
-Thumbs.db
-ehthumbs.db
